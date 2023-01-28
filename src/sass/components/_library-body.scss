@@ -1,0 +1,16 @@
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0em;
+  @include for-desktop-up {
+    font-size: 20px;
+  }
+}
+
+.empty-list.is-hidden {
+  display: none;
+}
