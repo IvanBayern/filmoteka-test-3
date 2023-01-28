@@ -1,13 +1,9 @@
 import { setStore, getStore, removeStore } from './local-storage.js';
 import { getGenre } from './modal-film';
-import { btnUp, btnDown } from './btn-scroll.js';
 
-const LEFT_ARROW = '&#8592;';
-const RIGHT_ARROW = '&#8594;';
+
 import {
-  IMG_PATH,
-  SMALL_SIZE,
-  NO_IMAGE,
+ 
   FILM_CURRENT_PAGE,
   KEY_QUEUE,
   KEY_WATCHED,
@@ -15,56 +11,11 @@ import {
   KEY_CURRENT_ID,
 } from './constants.js';
 
-const searchQuery = document.querySelector('.header__input');
 
-export function goUp() {
-  btnUp.el.click();
-  btnUp.hide();
-  btnDown.show();
-}
 
-export function renderPagination(page, pages, ref) {
-  let prevPage = page - 1;
-  let twoPrevPage = page - 2;
-  let nextPage = page + 1;
-  let twoNextPage = page + 2;
-  let markup = '';
 
-  if (!page || page > pages) {
-    ref.innerHTML = '';
-    return;
-  }
-  if (page > 1)
-    markup += `<li class="js-pagination__arrow-left">${LEFT_ARROW}</li>`;
 
-  if (page > 1)
-    markup += `<li class="js-pagination__button js-pagination__button-end">1</li>`;
 
-  if (page > 4) markup += `<li class="js-pagination__points">...</li>`;
-
-  if (page > 3)
-    markup += `<li class="js-pagination__button">${twoPrevPage}</li>`;
-
-  if (page > 2) markup += `<li class="js-pagination__button">${prevPage}</li>`;
-
-  markup += `<li class="js-pagination__button js-pagination__button-current">${page}</li>`;
-
-  if (page + 1 < pages)
-    markup += `<li class="js-pagination__button">${nextPage}</li>`;
-
-  if (page + 2 < pages)
-    markup += `<li class="js-pagination__button">${twoNextPage}</li>`;
-
-  if (page + 4 < pages) markup += `<li class="js-pagination__points">...</li>`;
-
-  if (page < pages)
-    markup += `<li class="js-pagination__button js-pagination__button-end">${pages}</li>`;
-
-  if (page < pages)
-    markup += `<li class="js-pagination__arrow-right">${RIGHT_ARROW}</li>`;
-
-  ref.innerHTML = markup;
-}
 
 // ref = where need to render
 export function renderFilmCards(data, ref) {

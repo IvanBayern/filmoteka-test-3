@@ -1,19 +1,37 @@
 import { renderPagination, renderFilmCards, goUp } from './common.js';
-import { KEY_QUEUE, KEY_WATCHED } from './constants.js';
 import { getStore } from './local-storage.js';
+
+
+
+
+const KEY_WATCHED = 'watched';
+
+const KEY_QUEUE = 'queue';
+
+// треба додати кнопкам в library name="watched" and name="queue" так lass active на queue
+
+
+
+
+
 
 const PER_PAGE = 6;
 
 let allData = [];
 let currentPage = 1;
 
-const queueRef = document.querySelector('.filter__item-queue');
-const watchedRef = document.querySelector('.filter__item-watched');
-const listRef = document.querySelector('.filter__list');
-const pagLibraryRef = document.querySelector('.js-pagination-library');
-const emptyRef = document.querySelector('.empty-list');
-const emptyTitleRef = document.querySelector('.empty-title');
+const queueRef = document.querySelector('.btn__queue');
+const watchedRef = document.querySelector('.btn__watched');
+const listRef = document.querySelector('.my__library-container');
+
+
+
 const galleryLibrary = document.querySelector('.js-gallery-library');
+
+// в library треба додати в body
+// <ul class="film-card-list js-gallery-library">
+//       <!-- Render Data expected -->
+//     </ul>
 
 window.addEventListener('load', () => {
   queueRef.click();
@@ -68,48 +86,23 @@ function clearGallery() {
   pagLibraryRef.innerHTML = '';
 }
 
-function paginateAllData(key) {
-  try {
-    let filmStorage = getStore(key);
+// function paginateAllData(key) {
+//   try {
+//     let filmStorage = getStore(key);
 
-    if (!filmStorage.length) return filmStorage;
+//     if (!filmStorage.length) return filmStorage;
 
-    const allStorageDataByPages = [];
-    for (let i = 0; i < filmStorage.length; i += PER_PAGE) {
-      let end =
-        i + PER_PAGE < filmStorage.length ? i + PER_PAGE : filmStorage.length;
-      allStorageDataByPages.push(filmStorage.slice(i, end));
-    }
-    console.log('allStorageDataByPages: ', allStorageDataByPages);
-    return allStorageDataByPages;
-  } catch (error) {
-    return [];
-  }
-}
+//     const allStorageDataByPages = [];
+//     for (let i = 0; i < filmStorage.length; i += PER_PAGE) {
+//       let end =
+//         i + PER_PAGE < filmStorage.length ? i + PER_PAGE : filmStorage.length;
+//       allStorageDataByPages.push(filmStorage.slice(i, end));
+//     }
+//     console.log('allStorageDataByPages: ', allStorageDataByPages);
+//     return allStorageDataByPages;
+//   } catch (error) {
+//     return [];
+//   }
+// }
 
-pagLibraryRef.addEventListener('click', onClickPagination);
 
-function onClickPagination(evt) {
-  const target = evt.target;
-
-  if (target.textContent === '...' || target.tagName !== 'LI') return;
-
-  if (target.classList.contains('js-pagination__arrow-left')) currentPage -= 1;
-
-  if (target.classList.contains('js-pagination__arrow-right')) currentPage += 1;
-
-  if (target.classList.contains('js-pagination__button'))
-    currentPage = Number(target.textContent);
-
-  try {
-    renderFilmCards(allData[currentPage - 1], galleryLibrary);
-    renderPagination(currentPage, allData.length, pagLibraryRef);
-
-    emptyRef.classList.add('is-hidden');
-  } catch (error) {
-    emptyRef.classList.remove('is-hidden');
-    emptyTitleRef.textContent = error.message;
-  }
-
-  goUp();
-}

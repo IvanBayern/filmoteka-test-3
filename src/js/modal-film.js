@@ -56,31 +56,31 @@ export default class ModalFilm {
 
     refs.body = document.querySelector('body');
     refs.modal = document.querySelector('[data-modal]');
-    refs.modalCloseBtn = document.querySelector('[data-modal-close]');
-    refs.posterPath = document.querySelector('#film__poster-path');
-    refs.title = document.querySelector('#film__title');
-    refs.voteAverage = document.querySelector('#film__vote-average');
-    refs.voteCount = document.querySelector('#film__vote-count');
-    refs.popularity = document.querySelector('#film__popularity');
-    refs.originalTitle = document.querySelector('#film__original-title');
-    refs.genre = document.querySelector('#film__genre');
-    refs.overview = document.querySelector('#film__overview');
-    refs.trailer = document.querySelector('#trailer');
+    // refs.modalCloseBtn = document.querySelector('[data-modal-close]');
+    // refs.posterPath = document.querySelector('#film__poster-path');
+    // refs.title = document.querySelector('#film__title');
+    // refs.voteAverage = document.querySelector('#film__vote-average');
+    // refs.voteCount = document.querySelector('#film__vote-count');
+    // refs.popularity = document.querySelector('#film__popularity');
+    // refs.originalTitle = document.querySelector('#film__original-title');
+    // refs.genre = document.querySelector('#film__genre');
+    // refs.overview = document.querySelector('#film__overview');
+    // refs.trailer = document.querySelector('#trailer');
     refs.btnWatched = document.querySelector('.btn_watched');
     refs.btnQueue = document.querySelector('.btn_queue');
 
     return refs;
   }
 
-  open() {
-    this.refs.modal.classList.remove('is-hidden');
-    this.refs.body.classList.add('body--modal-open');
-  }
+  // open() {
+  //   this.refs.modal.classList.remove('is-hidden');
+  //   this.refs.body.classList.add('body--modal-open');
+  // }
 
-  close() {
-    this.refs.modal.classList.add('is-hidden');
-    this.refs.body.classList.remove('body--modal-open');
-  }
+  // close() {
+  //   this.refs.modal.classList.add('is-hidden');
+  //   this.refs.body.classList.remove('body--modal-open');
+  // }
 
   setCurrentID(id) {
     setStore(KEY_CURRENT_ID, id);
@@ -119,27 +119,27 @@ export default class ModalFilm {
       id,
     } = this.data;
 
-    this.refs.posterPath.src = `https://image.tmdb.org/t/p/w500${poster_path}`;
-    this.refs.posterPath.alt = `${title}`;
-    this.refs.title.textContent = `${title}`;
-    this.refs.voteAverage.textContent = `${vote_average}`;
-    this.refs.voteCount.textContent = `${vote_count}`;
-    this.refs.popularity.textContent = `${popularity}`;
-    this.refs.originalTitle.textContent = `${original_title}`;
-    this.refs.genre.textContent = `${getGenre(genre_ids)}`;
-    this.refs.overview.textContent = `${overview}`;
-    this.refs.trailer.setAttribute('data-movie-id', id);
+    // this.refs.posterPath.src = `https://image.tmdb.org/t/p/w500${poster_path}`;
+    // this.refs.posterPath.alt = `${title}`;
+    // this.refs.title.textContent = `${title}`;
+    // this.refs.voteAverage.textContent = `${vote_average}`;
+    // this.refs.voteCount.textContent = `${vote_count}`;
+    // this.refs.popularity.textContent = `${popularity}`;
+    // this.refs.originalTitle.textContent = `${original_title}`;
+    // this.refs.genre.textContent = `${getGenre(genre_ids)}`;
+    // this.refs.overview.textContent = `${overview}`;
+    // this.refs.trailer.setAttribute('data-movie-id', id);
 
     this.setCurrentID(id);
     this.rerenderBtnWrapper();
 
-    if (poster_path === null) {
-      this.refs.posterPath.src =
-        'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
-    }
-    if (overview === '') {
-      this.refs.overview.textContent = 'No information';
-    }
+    // if (poster_path === null) {
+    //   this.refs.posterPath.src =
+    //     'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
+    // }
+    // if (overview === '') {
+    //   this.refs.overview.textContent = 'No information';
+    // }
   }
 
   get dataFilm() {
